@@ -6,13 +6,6 @@ using System;
 
 public class CubeScript : MonoBehaviour
 {
-    void Start()
-    {
-        Observable.Timer(TimeSpan.FromSeconds(2f))
-        .Subscribe(_ => Destroy(gameObject))
-        .AddTo(this);
-    }
-
     void Update()
     {
         transform.Rotate(new Vector3(0, 0, 5));
@@ -22,9 +15,6 @@ public class CubeScript : MonoBehaviour
     {
         transform.position = position;
         
-
-        return Observable.Timer(TimeSpan.FromSeconds(2.0f))
-        .SubscribeOn(Scheduler.ThreadPool)
-        .ObserveOnMainThread();
+        return Observable.Timer(TimeSpan.FromSeconds(2.0f));
     }
 }
