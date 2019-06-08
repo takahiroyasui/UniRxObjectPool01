@@ -14,8 +14,6 @@ public class CubePool : ObjectPool<CubeScript>
 
     protected override CubeScript CreateInstance()
     {
-        var e = GameObject.Instantiate(prefab);
-
-        return e;
+        return GameObject.Instantiate(prefab);
     }
 }
