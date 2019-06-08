@@ -6,8 +6,8 @@ using UniRx.Triggers;
 
 public class MainScript : MonoBehaviour
 {
-    private CubePool cubePool;
     [SerializeField] private CubeScript cubePrefab;
+    private CubePool cubePool;
 
     public void OnClick()
     {
@@ -16,17 +16,18 @@ public class MainScript : MonoBehaviour
         var cube = cubePool.Rent();
 
         cube.Generate(position)
-        .Subscribe(_ => cubePool.Return(cube))
-        .AddTo(this);
+            .Subscribe(_ => cubePool.Return(cube))
+            .AddTo(this);
     }
 
     void Start()
     {
         cubePool = new CubePool(cubePrefab);
+
         this.OnDestroyAsObservable()
-        .Subscribe(_ => {
-            Debug.Log("dipose");
-            cubePool.Dispose();
-        });
+            .Subscribe(_ => {
+                Debug.Log("dipose");
+                cubePool.Dispose();
+            }).AddTo(this);
     }
 }
